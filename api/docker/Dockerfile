@@ -30,4 +30,6 @@ RUN service cron start
 RUN a2enmod rewrite
 RUN service apache2 restart
 
+EXPOSE 80
+
 CMD sh /var/www/html/docker/startup.sh
