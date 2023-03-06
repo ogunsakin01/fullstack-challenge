@@ -2,14 +2,18 @@
 
 namespace Tests\Unit;
 
+use App\Http\Services\GetUserWeatherService;
 use App\Http\Services\ViewUserWeatherService;
 use App\Jobs\HandleUserWeatherJob;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
 class ViewUserWeatherServiceTest extends TestCase
 {
+    use RefreshDatabase;
+
     private User $user;
 
     public function setUp(): void
@@ -35,7 +39,7 @@ class ViewUserWeatherServiceTest extends TestCase
 
 
     public function test_that_user_with_weather_data_can_be_viewed(){
-        $this->user = User::first();
+        (new GetUserWeatherService($this->user->id))->handle();
         $response = (new ViewUserWeatherService($this->user->id))->handle();
         $this->assertTrue($response['success']);
         $this->assertIsArray($response['data']);

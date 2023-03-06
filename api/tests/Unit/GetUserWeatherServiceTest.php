@@ -4,11 +4,14 @@ namespace Tests\Unit;
 
 use App\Http\Services\GetUserWeatherService;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 
 class GetUserWeatherServiceTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * A basic test example.
      *
