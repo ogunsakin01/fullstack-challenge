@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(HandleUsersWeatherDataUpdate::class);
+        $schedule->job(HandleUsersWeatherDataUpdate::class);
     }
 
     /**

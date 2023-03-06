@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class HandleUsersWeatherDataUpdate implements ShouldQueue
 {
@@ -34,5 +35,6 @@ class HandleUsersWeatherDataUpdate implements ShouldQueue
             $user = $oldWeatherDatum->user;
             HandleUserWeatherJob::dispatch($user);
         }
+        Log::info('I got here');
     }
 }
