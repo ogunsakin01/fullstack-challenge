@@ -20,3 +20,6 @@ Route::get('/', function () {
         'users' => \App\Models\User::all(),
     ]);
 });
+
+Route::get('users', [\App\Http\Controllers\UserController::class, 'index']);
+Route::get('/get-user-weather/{userId}', [\App\Http\Controllers\WeatherController::class, 'get-user-weather']);
