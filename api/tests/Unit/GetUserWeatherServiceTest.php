@@ -12,11 +12,6 @@ class GetUserWeatherServiceTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function test_that_user_weather_can_be_retrieved_from_api_successfully()
     {
         $user = User::factory()->create();

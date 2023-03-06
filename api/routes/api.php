@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\WeatherController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +23,5 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('users', [\App\Http\Controllers\UserController::class, 'index']);
-Route::get('/get-user-weather/{userId}', [\App\Http\Controllers\WeatherController::class, 'get-user-weather']);
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/get-user-weather/{id}', [WeatherController::class, 'getUserWeather']);
