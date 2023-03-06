@@ -11,7 +11,8 @@ RUN apt-get install -y \
 RUN docker-php-ext-install \
     mysqli \
     pdo_mysql \
-    zip
+    zip \
+    redis \
 
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 

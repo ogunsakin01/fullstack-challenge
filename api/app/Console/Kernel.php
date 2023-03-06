@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Jobs\HandleUsersWeatherDataUpdate;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Log;
@@ -16,8 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-        $schedule->call(fn() => Log::info(json_encode(['Hello'])));
+        $schedule->call(HandleUsersWeatherDataUpdate::class);
     }
 
     /**
