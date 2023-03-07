@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\User;
 use App\Models\Weather;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
@@ -18,12 +19,14 @@ class HandleUsersWeatherDataUpdate implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private array|Collection $oldWeatherData;
+    private array|Collection $usersWithoutWeather;
     /**
      * Create a new job instance.
      */
     public function __construct()
     {
-        $this->oldWeatherData = Weather::query()->whereDate('created_at', '<', Carbon::now()->subHour())->get();
+        $this->oldWeatherData = Weather::query()->where('updated_at', '<', Carbon::now()->subMinutes(5))->get();
+        $this->usersWithoutWeather = User::query()->doesntHave('weather')->get();
     }
 
     /**
@@ -35,6 +38,9 @@ class HandleUsersWeatherDataUpdate implements ShouldQueue
             $user = $oldWeatherDatum->user;
             HandleUserWeatherJob::dispatch($user);
         }
-        Log::info('I got here');
+
+        foreach($this->usersWithoutWeather as $user){
+            HandleUserWeatherJob::dispatch($user);
+        }
     }
 }

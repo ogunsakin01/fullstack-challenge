@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WeatherController;
-use Illuminate\Http\Request;
+use App\Models\Weather;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,7 @@ Route::get('/', function () {
     return response()->json([
         'message' => 'all systems are a go',
         'users' => \App\Models\User::all(),
+        'old_weathers' => Weather::query()->where('updated_at', '<', Carbon::now()->subMinutes(10))->get()
     ]);
 });
 

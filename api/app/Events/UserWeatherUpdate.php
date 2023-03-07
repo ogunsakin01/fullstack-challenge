@@ -34,8 +34,13 @@ class UserWeatherUpdate
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('weather'),
             new Channel('weather')
         ];
+    }
+
+
+    public function broadcastAs(): string
+    {
+        return 'weather';
     }
 }

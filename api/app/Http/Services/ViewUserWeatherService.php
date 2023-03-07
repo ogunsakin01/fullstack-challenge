@@ -56,5 +56,6 @@ class ViewUserWeatherService
     private function getWeather(): void
     {
         $this->weather = json_decode($this->user->weather->details,true);
+        $this->weather['last_updated_at'] = date('d D, M Y H:i A', strtotime($this->user->weather->updated_at));
     }
 }
