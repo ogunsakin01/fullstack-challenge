@@ -12,15 +12,6 @@ export default {
 
   created() {
     this.fetchData();
-    // const pusher = new Pusher("6b16e5b60b40dc1cd51b", {
-    //   cluster: "eu",
-    // });
-    //
-    // const channel = pusher.subscribe("weather");
-    // channel.bind("weather", function (data) {
-    //   console.log(data);
-    //   console.log("log lol");
-    // });
   },
 
   methods: {
@@ -33,11 +24,13 @@ export default {
           title: "Success",
           message: response.message,
         });
+      }else if(!response.success){
+        iziToast.error({
+          title: "Error",
+          message: response.message,
+        });
       }
-      iziToast.error({
-        title: "Error",
-        message: response.message,
-      });
+
     },
 
     async fetchUserWeather(user) {
