@@ -6,7 +6,7 @@
 - Navigate to `/api` folder
 - Ensure version docker installed is active on host
 - Copy .env.example: `cp .env.example .env`
-- Sign up on OpenWeather(https://openweathermap.org/api ) to retrieve API key and set in .env and .env.test as `WEATHER_API_KEY=`
+- Sign up on OpenWeather(https://openweathermap.org/api ) to retrieve API key and set in .env and .env.test as `WEATHER_API_KEY=`. It takes about 3o minutes before the API key is active, please wait a bit or use default key set in the .env.test
 - Stop any running docker containers `docker compose down`
 - Build new docker containers `docker compose build`
 - Start docker containers `docker compose up` (add `-d` to run detached)
