@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Jobs\HandleUserWeatherJob;
 use App\Models\User;
+use Carbon\Carbon;
 use Exception;
 
 class ViewUserWeatherService
@@ -50,6 +51,8 @@ class ViewUserWeatherService
         if(is_null($this->user->weather)){
             HandleUserWeatherJob::dispatch($this->user);
             throw new Exception('Fetching an updated weather report', 201);
+        }elseif(Carbon::create($this->user->weather->updated_at)< Carbon::now()){
+            HandleUserWeatherJob::dispatch($this->user);
         }
     }
 

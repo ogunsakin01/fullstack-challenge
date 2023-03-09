@@ -32,7 +32,7 @@ class HandleUserWeatherJob implements ShouldQueue
         $response = (new GetUserWeatherService($this->user->id))->handle();
         if($response['code'] == 200){
             $weatherInfo = $response['data'];
-            broadcast(new UserWeatherUpdate($this->user, $weatherInfo))->toOthers();
+            event(new UserWeatherUpdate($this->user, $weatherInfo));
         }
 
     }
